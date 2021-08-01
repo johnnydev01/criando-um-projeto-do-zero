@@ -1,1 +1,57 @@
 // TODO
+.container{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+ 
+
+    .post{
+        max-width: 720px;
+        margin: 5rem auto 0;
+
+        .infoPublication{
+            display: flex;
+            color: var(--info);
+            margin-top: 1.5rem;
+            margin-bottom: 4rem;
+            font-size: 0.875rem;
+
+            p,time {
+                margin-left: 8px;
+                margin-right: 1.5rem;
+            }
+        }
+        strong{
+            color: var(--heading);
+        }
+
+        >strong{
+            font-weight: 700;
+            font-size: 3rem;
+        }
+
+        .content{
+            strong{
+                font-size: 2rem;
+                font-weight: 600;
+            }
+            p{
+                margin: 1.5rem auto;
+                width: 100%;
+                color: var(--body);
+                text-align: justify;
+                text-justify: inter-word;
+                line-height: 1.5rem;
+                font-size: 1.125rem;
+            }
+        }
+    }
+}
+
+.banner{
+    margin-top: 2.5rem;
+    width: 100%;
+}
+
+
