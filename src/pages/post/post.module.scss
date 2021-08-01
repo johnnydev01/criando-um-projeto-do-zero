@@ -14,13 +14,19 @@
             display: flex;
             color: var(--info);
             margin-top: 1.5rem;
-            margin-bottom: 4rem;
             font-size: 0.875rem;
 
             p,time {
                 margin-left: 8px;
                 margin-right: 1.5rem;
             }
+        }
+        .infoEdited{
+            margin-top: 1rem;
+            margin-bottom: 4rem;
+            color: var(--info);
+            font-size: 0.875rem;
+
         }
         strong{
             color: var(--heading);
@@ -44,6 +50,29 @@
                 text-justify: inter-word;
                 line-height: 1.5rem;
                 font-size: 1.125rem;
+            }
+
+        }
+        .border{
+            border-bottom: 1px solid var(--info);
+            width: 100%;
+            display: block;
+            margin-top: 4rem;
+        }
+        .containerLinks{
+            margin: 4rem auto;
+            display: flex;
+            justify-content: space-between;
+
+            .linkPrevious{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                a{
+                    color: var(--highlight);
+                    font-weight: bold;
+                    font-size: 0.875rem;
+                }
             }
         }
     }

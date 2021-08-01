@@ -12,6 +12,8 @@ import { RichText } from 'prismic-dom';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { Fragment } from 'react';
+import Comments from '../../components/Comments';
+import Link from 'next/link';
 interface Post {
   first_publication_date: string | null;
   data: {
@@ -74,9 +76,15 @@ export default function Post({post}: PostProps) {
             <FiClock />
             <p>{minutesToRead} min</p>
           </div>
-
+          <div className={styles.infoEdited}>
+              <p>* editado em&nbsp;
+              { format(new Date(post.first_publication_date), 'dd MMM u', {
+                locale: ptBR,
+              })}, ás 15:49
+              </p>
+          </div>
           <div className={styles.content}>
-          {post.data.content.map((content, index) => (
+            {post.data.content.map((content, index) => (
               <Fragment key={String(index)}>
                 <strong>{content.heading}</strong>
                 <div
@@ -88,7 +96,24 @@ export default function Post({post}: PostProps) {
               </Fragment>
             ))}
           </div>
+          <span className={styles.border}></span>
+          <div className={styles.containerLinks}>
+            <div className={styles.linkPrevious}>
+              {/* <strong>Como utilizar Hooks</strong> */}
+              <Link href={`/post/como-utilizar-hooks`}>
+                <a>Post anterior</a>
+              </Link>
+            </div>
+            <div className={styles.linkPrevious}>
+              {/* <strong>Criando um app CRA do Zero</strong> */}
+              <Link href={`/post/criando-um-app-cra-d-zero`}>
+                <a>Post anterior</a>
+              </Link>
+            </div>
+          </div>
+          <Comments />
         </main>
+
       </div>
     </>
   )

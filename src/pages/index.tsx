@@ -28,9 +28,10 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean
 }
 
-export default function Home( { postsPagination }: HomeProps) {
+export default function Home( { postsPagination, preview }: HomeProps) {
   const { next_page, results } = postsPagination;
   const [posts, setPosts] = useState<Post[]>(results);
   const [nextPage, setNextPage] = useState<string>(next_page);
@@ -92,6 +93,13 @@ export default function Home( { postsPagination }: HomeProps) {
           {nextPage && (
             <button onClick={handleLoadPostsClick}>Carregar mais posts</button>
           )}
+          {preview && (
+            <aside>
+              <Link href="/api/exit-preview">
+                <a style={{color: '#F8F8F8'}}>Sair do modo Preview</a>
+              </Link>
+            </aside>
+		      )}
         </div>
 
       </main>
@@ -99,13 +107,15 @@ export default function Home( { postsPagination }: HomeProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({preview = false, previewData}) => {
   const prismic = getPrismicClient();
+
   const postsResponse = await prismic.query([
     Prismic.predicates.at('document.type', 'posts')
   ], {
     fetch: ['posts.title', 'posts.subtitle', 'posts.author', 'posts.banner', 'posts.content'],
     pageSize: 30,
+    ref: previewData?.ref ?? null,
   });
 
   const { next_page } = postsResponse;
@@ -121,6 +131,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }));
   return {
     props: {
+      preview,
       postsPagination: {
         next_page,
         results: posts,
